@@ -1,11 +1,4 @@
-<pre> 
-         __                __
-   _____/ /___  __  ______/ /  _________  (_)___  ___  _____ 
-  / ___/ / __ \/ / / / __  /  / ___/ __ \/ / __ \/ _ \/ ___/ 
- / /__/ / /_/ / /_/ / /_/ /  (__  ) / / / / /_/ /  __/ / 
-\___/_/\____/\__,_/\__,_/  /____/_/ /_/_/ .___/\___/_/
-                                       /_/
-</pre>
+![alt text](Images/logo.png "Cloud Sniper")
 
 ### *Cloud Security Operations*
 
@@ -18,7 +11,7 @@ At the same time, it makes it possible to generate a knowledge database of indic
 It is currently available for **AWS** cloud environments, but will be extended to all cloud platforms.
 
 ### *Cloud Deployment*
-![alt text](cloud-sniper.png "Cloud Sniper")
+![alt text](Images/deployment.png "Cloud Sniper")
 
 
 1.  Already integrated with these AWS artifacts:
