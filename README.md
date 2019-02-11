@@ -38,7 +38,7 @@ It is currently available for **AWS** cloud environments, but will be extended t
 3. Installation:
     You only need to have configured the *AWS profile* and the *Terraform* client.
 
-    1.  Deployment:
+    1.  Deployment (must be located inside the ***Cloud-Sniper*** folder):
         1.  terraform init
         2.  terraform plan
         3.  terraform apply [yes]
