@@ -19,6 +19,13 @@ resource "aws_lambda_function" "lambda_function_cloud_sniper" {
     variables {
       IPSET_CLOUD_SNIPER_AUTOMATIC_BLOCK_THIS_IPS = "${aws_wafregional_ipset.ipset-cloud-sniper-automatic-block-this-ips.id}"
     }
+    variables {
+      SQS_QUEUE_CLOUD_SNIPER = "${aws_sqs_queue.sqs_queue_cloud_sniper.id}"
+    }
   }
   
 }
+
+
+
+
