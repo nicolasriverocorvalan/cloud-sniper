@@ -13,7 +13,7 @@ A knowledge database will be created to store the IOCs that affect the cloud env
 
 The ***Cloud Sniper Analytics module*** allows to analyze the flow logs of the entire network where an affected instance is deployed and obtain analytics on traffic behavior, looking for Command and Control (C2) activity.
 
-###Installation (AWS)
+### Installation (AWS)
 
     Cloud Sniper uses Terraform to automatically deploy the entire infrastructure in the cloud.
 
@@ -27,7 +27,7 @@ The ***Cloud Sniper Analytics module*** allows to analyze the flow logs of the e
     4.  ~/Cloud-Sniper$ terraform plan
     5.  ~/Cloud-Sniper$ terraform apply [yes]
 
-###AWS artifacts integration:
+### AWS artifacts integration:
 
     1.  GuardDuty (all findings)
     2.  SQS
