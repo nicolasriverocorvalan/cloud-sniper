@@ -8,7 +8,7 @@
 
 With this platform you will have a complete and comprehensive management of security incidents, reducing the costs of having many level-1 security analysts looking for cloud-based *Indicators of Compromise*. These IOCs, if not correlated, generate difficulties in detecting complex attacks. At the same time, it allows the advanced security analysts to integrate the platform with external forensic or incident and response tools to provide security feeds into the platform.
 
-Companies with low security budgets can count on a continuous real-time security monitoring center. The cloud-based platform is deployed automatically and provides complete and native integration with all the necessary information sources, avoiding the problem that many vendors have when deploying or collecting data.
+The cloud-based platform is deployed automatically and provides complete and native integration with all the necessary information sources, avoiding the problem that many vendors have when deploying or collecting data.
 
 ***Cloud Sniper*** receives cloud-based and third-parties feeds and automatically responds protecting your infrastructure and generating a knowledge database of IOCs that are affecting your platform. This is the best way to gain visibility in environments where information can be bounded by the *Shared Responsibility Model* enforced by cloud providers.
 
