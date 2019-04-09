@@ -4,9 +4,9 @@
 
 ### *What is Cloud Sniper?*
 
-***Cloud Sniper*** is a platform designed to manage *Security Operations* in cloud environments. It is an open platform that allows responding to security incidents by analyzing and correlating native cloud artifacts. Cloud Sniper is to be used as a *Virtual Security Operations Center (vSOC)** to detect and remediate security incidents providing a complete visibility of the company's cloud security position.  
+***Cloud Sniper*** is a platform designed to manage *Security Operations* in cloud environments. It is an open platform that allows responding to security incidents by analyzing and correlating native cloud artifacts. Cloud Sniper is to be used as a *Virtual Security Operations Center (vSOC)* to detect and remediate security incidents providing a complete visibility of the company's cloud security position.  
 
-With this platform, you will have a complete and comprehensive management of the security incidents, reducing the costs of having many level-1 security analysts looking for cloud-based *Indicators of Compromise (IOC)*. These *IOCs*, if not correlated, generate difficulties in detecting complex attacks. At the same time, Cloud Sniper lets the advanced security analysts integrate the platform with external forensic or incident and response tools to provide security feeds into the platform.
+With this platform, you will have a complete and comprehensive management of the security incidents, reducing the costs of having many level-1 security analysts looking for cloud-based *Indicators of Compromise (IOC)*. These *IOCs*, if not correlated, generate difficulties in detecting complex attacks. At the same time, ***Cloud Sniper*** lets the advanced security analysts integrate the platform with external forensic or incident and response tools to provide security feeds into the platform.
 
 The cloud-based platform is deployed automatically and provides complete and native integration with all the necessary information sources, avoiding the problem that many vendors have when deploying or collecting data.
 
@@ -28,6 +28,7 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
         1.  WAF filtering
         2.  NACLs filtering
         3.  IOCs knowledge database
+        4.  Tactics, Techniques and Procedures (TTPs) used by the attacker
 
 ### Upcoming Releases
 
@@ -36,14 +37,11 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
 
 ### Upcoming Features and Integrations
 
-    1.  Cloud Sniper runs within a lambda function, the standalone version is on the way
-    2.  Centralized management of security incidents for multiple accounts
-    3.  Security analytics module 
-        1.  WAF analytics
+    1.  Security playbooks for cloud-based environments
+    2.  Centralized management of security incidents for multiple accounts. Web Management UI
+    3.  WAF analytics
     4.  Case management (automatic case creation)
     5.  IOCs enrichment and Threat Intelligence feeds
-    6.  Tactics, Techniques and Procedures (TTPs). MITRE approach
+    6.  Tactics, Techniques and Procedures (TTPs) coverage. MITRE approach
     7.  Automatic security reports based on well-known security standards (NIST)
-    8.  Security playbooks for cloud-based environments
-    9.  Integration with third-party DFIR tools
-    10.  Web Management UI
+    8.  Integration with third-party DFIR tools
