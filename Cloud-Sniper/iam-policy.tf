@@ -87,6 +87,19 @@ data "aws_iam_policy_document" "iam_policy_document_cloud_sniper" {
 		]
 	}
 
+	statement {
+
+		effect = "Allow"
+
+		actions = [
+			"s3:*",  
+		]
+
+		resources = [      
+			"*",                                                                              
+		]
+	}
+
 }
 
 resource "aws_iam_policy" "iam_policy_cloud_sniper" {

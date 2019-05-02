@@ -11,35 +11,40 @@ When *GuardDuty* detects an incident, ***Cloud Sniper*** automatically analyzes 
 
 A knowledge database will be created to store the *IOCs* that affect the cloud environments and will build its own *Threat Intelligence* feeds to use in the future.
 
-The ***Cloud Sniper Analytics*** module allows to analyze the flow logs of the entire network where an affected instance is deployed and obtain analytics on traffic behavior, looking for *Command and Control (C2)** activity.
+The ***Cloud Sniper Analytics*** module allows to analyze the flow logs of the entire network where an affected instance is deployed and obtain analytics on traffic behavior, looking for *Command and Control (C2)* activity.
 
 ### Installation (AWS)
 
-    Cloud Sniper uses Terraform to automatically deploy the entire infrastructure in the cloud. The core is 
-    programmed in python, so it can be extended according to the needs of each vSOC.
+    Cloud Sniper uses Terraform to automatically deploy the entire infrastructure in the cloud. The core is programmed in python, so it can be extended according to the needs of each vSOC.
     
     You must have:
+
     1.  AWS cli  installed
     2.  A programmatic access key
-    3.  AWS profile configured
+    3.  AWS local profile configured
     4.  Terraform client installed
 
     To deploy Cloud Sniper you must run:
-    1.  git clone https://github.com/nicolasriverocorvalan/cloud-sniper.git
+
+    1.  ~$ git clone https://github.com/nicolasriverocorvalan/cloud-sniper.git
     2.  ~$ cd Cloud-Sniper
-    3.  Edit the main.tf file
+    3.  Set the environment variables corresponding to the account in the variables.tf file
+    4.  Edit the main.tf file
 
         provider "aws" {
-          region                    = "region"
-          shared_credentials_file   = "/your-home/.aws/credentials"
-          profile                   = "your-profile"
+            region                = "region"
+            shared_credentials_file   = "/your-home/.aws/credentials"
+            profile               = "your-profile"
         }
 
-    4.  ~/Cloud-Sniper$ terraform init
-    5.  ~/Cloud-Sniper$ terraform plan
-    6.  ~/Cloud-Sniper$ terraform apply [yes]
+    5.  ~/Cloud-Sniper$ terraform init
+    6.  ~/Cloud-Sniper$ terraform plan
+    7.  ~/Cloud-Sniper$ terraform apply [yes]
+
 
 ### AWS artifacts integration:
+
+    The platform is integrated with the following cloud technologies:
 
     1.  GuardDuty findings
     2.  SQS

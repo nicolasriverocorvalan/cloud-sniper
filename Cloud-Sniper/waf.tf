@@ -27,15 +27,19 @@ resource "aws_wafregional_web_acl" "acl-cloud-sniper" {
     type     = "REGULAR"
   }
 
+  logging_configuration {
+    log_destination = "${aws_kinesis_firehose_delivery_stream.aws-waf-logs-cloudsniper.arn}"
+  }  
+
 }
 
 resource "aws_wafregional_rule" "rule-cloud-sniper-automatic-ip-defense" {
-  depends_on  = ["aws_wafregional_ipset.ipset-cloud-sniper-automatic-block-this-ips"]
+  depends_on  = ["aws_wafregional_ipset.ipset-cloud-sniper-automatic-block-these-ips"]
   name        = "rule-cloud-sniper-automatic-ip-defense"
   metric_name = "ruleCloudSniperAutomaticIpDefense"
 
   predicate {
-    data_id = "${aws_wafregional_ipset.ipset-cloud-sniper-automatic-block-this-ips.id}"
+    data_id = "${aws_wafregional_ipset.ipset-cloud-sniper-automatic-block-these-ips.id}"
     negated = false
     type    = "IPMatch"
   }
@@ -83,6 +87,6 @@ resource "aws_wafregional_geo_match_set" "geo-match-set-cloud-sniper-country-blo
   }
 }
 
-resource "aws_wafregional_ipset" "ipset-cloud-sniper-automatic-block-this-ips" {
-  name = "ipset-cloud-sniper-automatic-block-this-ips"
+resource "aws_wafregional_ipset" "ipset-cloud-sniper-automatic-block-these-ips" {
+  name = "ipset-cloud-sniper-automatic-block-these-ips"
 }
