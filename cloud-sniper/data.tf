@@ -40,21 +40,3 @@ data "aws_iam_policy_document" "iam_policy_firehose" {
     actions = ["sts:AssumeRole"]
   }
 }
-
-data "aws_iam_policy_document" "iam_policy_sqs_queue" {
-  statement {
-    principals {
-      identifiers = ["*"]
-      type        = "*"
-    }
-
-    actions   = ["sqs:SendMessage"]
-    resources = ["${aws_sqs_queue.sqs_queue_cloud_sniper.arn}"]
-
-    condition {
-      test     = "ArnEquals"
-      values   = ["aws:SourceArn"]
-      variable = "${aws_cloudwatch_event_rule.aws_cloudwatch_event_rule_cloud_sniper.arn}"
-    }
-  }
-}
