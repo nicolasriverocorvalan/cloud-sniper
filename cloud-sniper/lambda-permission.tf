@@ -6,6 +6,6 @@ resource "aws_lambda_permission" "aws_lambda_permission_cloud_sniper" {
 
 resource "aws_lambda_permission" "lambda_function_cloud_sniper_tagging" {
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.lambda_function_cloud_sniper_tagging_incident_and_response.function_name}"
+  function_name = "${aws_lambda_function.lambda_function_cloud_sniper_tagging_ir.function_name}"
   principal     = "events.amazonaws.com"
 }

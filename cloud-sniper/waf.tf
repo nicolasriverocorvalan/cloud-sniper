@@ -27,7 +27,7 @@ resource "aws_wafregional_web_acl" "acl-cloud-sniper" {
   }
 
   logging_configuration {
-    log_destination = "${aws_kinesis_firehose_delivery_stream.aws-waf-logs-cloudsniper.arn}"
+    log_destination = "${aws_kinesis_firehose_delivery_stream.aws_waf_logs_cloudsniper.arn}"
   }
 }
 

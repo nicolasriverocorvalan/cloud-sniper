@@ -28,7 +28,7 @@ resource "aws_lambda_function" "lambda_function_cloud_sniper" {
   }
 }
 
-resource "aws_lambda_function" "lambda_function_cloud_sniper_tagging" {
+resource "aws_lambda_function" "lambda_function_cloud_sniper_tagging_ir" {
   function_name    = "lambda_function_cloud_sniper_tagging_incident_and_response"
   description      = "lambda_function_cloud_sniper_tagging_incident_and_response"
   handler          = "cloud_sniper_tagging_ir.cloud_sniper_tagging_ir"
