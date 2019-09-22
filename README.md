@@ -1,4 +1,4 @@
-![alt text](Images/logo.png "Cloud Sniper")
+![alt text](images/logo.png "Cloud Sniper")
 <br> </br>
 ## *Cloud Security Operations*
 
@@ -18,9 +18,9 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
 <br> </br>
 ### *Automatic infrastructure deployment (AWS)*
 
-![alt text](Images/deployment.png "Cloud Sniper")
+![alt text](images/deployment.png "Cloud Sniper")
 <br> </br>
-### WIKI => [HOW IT WORKS](Wiki/WIKI.md)
+### WIKI => [HOW IT WORKS](wiki/WIKI.md)
 
 ### NEWS!!! Cloud Sniper Latest Releases
 

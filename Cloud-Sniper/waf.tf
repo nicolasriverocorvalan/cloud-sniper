@@ -1,5 +1,4 @@
 resource "aws_wafregional_web_acl" "acl-cloud-sniper" {
-
   name        = "acl-cloud-sniper"
   metric_name = "aclCloudSniper"
 
@@ -29,8 +28,7 @@ resource "aws_wafregional_web_acl" "acl-cloud-sniper" {
 
   logging_configuration {
     log_destination = "${aws_kinesis_firehose_delivery_stream.aws-waf-logs-cloudsniper.arn}"
-  }  
-
+  }
 }
 
 resource "aws_wafregional_rule" "rule-cloud-sniper-automatic-ip-defense" {
@@ -57,9 +55,9 @@ resource "aws_wafregional_rule" "rule-cloud-sniper-country-blocked" {
   }
 }
 
-
 resource "aws_wafregional_geo_match_set" "geo-match-set-cloud-sniper-country-blocked" {
   name = "geo-match-set-cloud-sniper-country-blocked"
+
   geo_match_constraint {
     type  = "Country"
     value = "KP"
@@ -69,18 +67,22 @@ resource "aws_wafregional_geo_match_set" "geo-match-set-cloud-sniper-country-blo
     type  = "Country"
     value = "HK"
   }
+
   geo_match_constraint {
     type  = "Country"
     value = "RU"
   }
+
   geo_match_constraint {
     type  = "Country"
     value = "SC"
   }
+
   geo_match_constraint {
     type  = "Country"
     value = "KZ"
   }
+
   geo_match_constraint {
     type  = "Country"
     value = "CN"

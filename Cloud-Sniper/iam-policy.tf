@@ -1,111 +1,101 @@
 data "aws_iam_policy_document" "iam_policy_document_cloud_sniper" {
-	
-	statement {
+  statement {
+    effect = "Allow"
 
-		effect = "Allow"
+    actions = [
+      "waf-regional:GetIPSet",
+      "waf-regional:UpdateIPSet",
+      "waf-regional:GetChangeToken",
+    ]
 
-		actions = [
-			"waf-regional:GetIPSet",
-			"waf-regional:UpdateIPSet",
-			"waf-regional:GetChangeToken",
-		]
+    resources = [
+      "*",
+    ]
+  }
 
-		resources = [      
-			"*",
-		]
-	}
+  statement {
+    effect = "Allow"
 
-	statement {
+    actions = [
+      "kms:*",
+    ]
 
-		effect = "Allow"
+    resources = [
+      "*",
+    ]
+  }
 
-		actions = [
-			"kms:*",
-		]
+  statement {
+    effect = "Allow"
 
-		resources = [      
-			"*",
-		]
-	}
+    actions = [
+      "ec2:Describe*",
+      "ec2:*NetworkAcl*",
+    ]
 
-	statement {
+    resources = [
+      "*",
+    ]
+  }
 
-		effect = "Allow"
+  statement {
+    effect = "Allow"
 
-		actions = [
-			"ec2:Describe*",
-			"ec2:*NetworkAcl*",      
-		]
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
 
-		resources = [
-			"*",
-		]
-	}
+    resources = [
+      "arn:aws:logs:*:*:*",
+    ]
+  }
 
-	statement {
+  statement {
+    effect = "Allow"
 
-		effect = "Allow"
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+      "dynamodb:DeleteItem",
+    ]
 
-		actions = [
-			"logs:CreateLogGroup",
-			"logs:CreateLogStream",
-			"logs:PutLogEvents",    
-		]
+    resources = [
+      "*",
+    ]
+  }
 
-		resources = [
-			"arn:aws:logs:*:*:*",
-		]
-	}
+  statement {
+    effect = "Allow"
 
-	statement {
+    actions = [
+      "sqs:*",
+    ]
 
-		effect = "Allow"
+    resources = [
+      "*",
+    ]
+  }
 
-		actions = [
-			"dynamodb:GetItem",
-			"dynamodb:PutItem",
-			"dynamodb:Query",
-			"dynamodb:Scan",
-			"dynamodb:DeleteItem",    
-		]
+  statement {
+    effect = "Allow"
 
-		resources = [      
-			"*",                                                                              
-		]
-	}
-	
-	statement {
+    actions = [
+      "s3:*",
+    ]
 
-		effect = "Allow"
-
-		actions = [
-			"sqs:*",  
-		]
-
-		resources = [      
-			"*",                                                                              
-		]
-	}
-
-	statement {
-
-		effect = "Allow"
-
-		actions = [
-			"s3:*",  
-		]
-
-		resources = [      
-			"*",                                                                              
-		]
-	}
-
+    resources = [
+      "*",
+    ]
+  }
 }
 
 resource "aws_iam_policy" "iam_policy_cloud_sniper" {
-	name        = "iam_policy_cloud_sniper"
-	path        = "/"
-	description = "iam_policy_cloud_sniper"
-	policy = "${data.aws_iam_policy_document.iam_policy_document_cloud_sniper.json}" 
-															
+  name        = "iam_policy_cloud_sniper"
+  path        = "/"
+  description = "iam_policy_cloud_sniper"
+  policy      = "${data.aws_iam_policy_document.iam_policy_document_cloud_sniper.json}"
 }
