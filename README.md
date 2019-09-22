@@ -31,20 +31,16 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
         4.  Tactics, Techniques and Procedures (TTPs) used by the attacker
     2.  Security playbooks
         1.  NIST approach
-
-### Upcoming Releases
-
-    1.  Automatic security tagging 
-    2.  Cloud Sniper Analytics
+    3.  Automatic security tagging
+    4.  Cloud Sniper Analytics
         1.  Beaconing detection with VPC Flow Logs (C2 detection analytics)
 
 ### Upcoming Features and Integrations
 
-    1.  Security playbooks for cloud-based environments. MITRE approach
-    2.  Security incidents centralized managment for multiple accounts. Web Management UI
+    1.  Security playbooks for cloud-based environments
+    2.  Security incidents centralized management for multiple accounts. Web Management UI
     3.  WAF analytics
     4.  Case management (automatic case creation)
     5.  IOCs enrichment and Threat Intelligence feeds
-    6.  Tactics, Techniques and Procedures (TTPs) coverage. MITRE approach
-    7.  Automatic security reports based on well-known security standards (NIST)
-    8.  Integration with third-party security tools (DFIR)
+    6.  Automatic security reports based on well-known security standards (NIST)
+    7.  Integration with third-party security tools (DFIR)
