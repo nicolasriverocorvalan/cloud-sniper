@@ -27,3 +27,15 @@ resource "aws_lambda_function" "lambda_function_cloud_sniper" {
     }
   }
 }
+
+resource "aws_lambda_function" "lambda_function_cloud_sniper_tagging" {
+  function_name    = "lambda_function_cloud_sniper_tagging_incident_and_response"
+  description      = "lambda_function_cloud_sniper_tagging_incident_and_response"
+  handler          = "cloud_sniper_tagging_ir.cloud_sniper_tagging_ir"
+  memory_size      = 1024
+  timeout          = 300
+  role             = "${aws_iam_role.role_cloud_sniper_tagging.arn}"
+  runtime          = "python3.7"
+  filename         = "${data.archive_file.lambda_function_cloud_sniper_tagging.output_path}"
+  source_code_hash = "${data.archive_file.lambda_function_cloud_sniper_tagging.output_base64sha256}"
+}

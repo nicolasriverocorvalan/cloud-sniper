@@ -40,3 +40,9 @@ data "aws_iam_policy_document" "iam_policy_firehose" {
     actions = ["sts:AssumeRole"]
   }
 }
+
+data "archive_file" "lambda_function_cloud_sniper_tagging" {
+  type        = "zip"
+  source_dir  = "./lambdas/functions/cloud-sniper-tagging/"
+  output_path = "./lambdas/archives/lambda_function_cloud_sniper_tagging_ir.zip"
+}
