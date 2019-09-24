@@ -18,7 +18,7 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
 <br> </br>
 ### *Automatic infrastructure deployment (AWS)*
 
-![alt text](images/deployment.png "Cloud Sniper")
+![alt text](images/deployment.png "CloudSniper")
 <br> </br>
 ### WIKI => [HOW IT WORKS](wiki/WIKI.md)
 
