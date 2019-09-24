@@ -16,9 +16,9 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
 
 ***Cloud Sniper*** is currently available for *AWS*, but it is to be extended to others cloud platforms.
 <br> </br>
-### *Automatic infrastructure deployment (AWS)*
+### *Automatic infrastructure deployment (for AWS)*
 
-![alt text](images/deployment.png "CloudSniper")
+![alt text](images/deployment.png "Cloud Sniper")
 <br> </br>
 ### WIKI => [HOW IT WORKS](wiki/WIKI.md)
 
