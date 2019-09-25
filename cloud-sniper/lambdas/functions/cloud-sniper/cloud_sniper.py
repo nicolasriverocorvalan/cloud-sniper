@@ -8,10 +8,9 @@ from boto3.dynamodb.conditions import Attr
 log = logging.getLogger()
 log.setLevel(logging.INFO)
 
-IPSET_ID = os.environ['IPSET_CLOUD_SNIPER_AUTOMATIC_BLOCK_THESE_IPS']
+IPSET_ID = os.environ['IPSET_CLOUD_SNIPER_AUTOMATIC_BLOCK_THIS_IPS']
 DYNAMO_TABLE = os.environ['DYNAMO_TABLE_CLOUD_SNIPER']
 SQS_QUEUE = os.environ['SQS_QUEUE_CLOUD_SNIPER']
-BUCKET = os.environ['BUCKET_CLOUD_SNIPER']+'/analytics/'
 
 s = boto3.session.Session(region_name=os.environ['AWS_REGION'])
 
@@ -38,29 +37,12 @@ portProbeAction = [
 ]
 
 awsApiCallAction = [
-	"UnauthorizedAccess:IAMUser/ConsoleLogin",
-	"UnauthorizedAccess:IAMUser/ConsoleLoginSuccess.B",
-	"UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration",
-	"UnauthorizedAccess:IAMUser/MaliciousIPCaller.Custom",
-	"UnauthorizedAccess:IAMUser/MaliciousIPCaller",
-	"UnauthorizedAccess:IAMUser/TorIPCaller",
-	"Stealth:IAMUser/CloudTrailLoggingDisabled",
-	"Stealth:IAMUser/LoggingConfigurationModified",
-	"Stealth:IAMUser/PasswordPolicyChange",
-	"ResourceConsumption:IAMUser/ComputeResources",
 	"Recon:IAMUser/MaliciousIPCaller.Custom",
 	"Recon:IAMUser/MaliciousIPCaller",
-	"Recon:IAMUser/NetworkPermissions",
-	"Recon:IAMUser/ResourcePermissions",
 	"Recon:IAMUser/TorIPCaller",
-	"Recon:IAMUser/UserPermissions",
-	"Persistence:IAMUser/NetworkPermissions",
-	"Persistence:IAMUser/ResourcePermissions",
-	"Persistence:IAMUser/UserPermissions",
 	"PenTest:IAMUser/KaliLinux",
 	"PenTest:IAMUser/PentooLinux",
 	"PenTest:IAMUser/ParrotLinux",
-	"Policy:IAMUser/RootCredentialUsage",
 ]
 
 instanceDetails = [
@@ -83,12 +65,11 @@ instanceDetails = [
 	"UnauthorizedAccess:EC2/TorClient",
 	"UnauthorizedAccess:EC2/TorIPCaller",
 	"UnauthorizedAccess:EC2/TorRelay",
-	"Behavior:EC2/NetworkPortUnusual",
-	"Behavior:EC2/TrafficVolumeUnusual",
 ]
 
 
 def read_sqs():
+
 	response = sqs.receive_message(
 		QueueUrl=queue_url,
 		MaxNumberOfMessages=10,
@@ -103,7 +84,8 @@ def read_sqs():
 		return
 
 
-def search_ioc():
+def search_ioc():	
+	
 	log.info("searching for IOC ...")
 
 	global json_a
@@ -152,13 +134,12 @@ def search_ioc():
 				isp = (data["detail"]["service"]["action"]["networkConnectionAction"]["remoteIpDetails"]["organization"]["isp"]).replace(","," ")
 				org = (data["detail"]["service"]["action"]["networkConnectionAction"]["remoteIpDetails"]["organization"]["org"]).replace(","," ")
 				country = data["detail"]["service"]["action"]["networkConnectionAction"]["remoteIpDetails"]["country"]["countryName"]
-				city = (data["detail"]["service"]["action"]["networkConnectionAction"]["remoteIpDetails"]["city"]["cityName"]).replace(","," ")				
+				city = (data["detail"]["service"]["action"]["networkConnectionAction"]["remoteIpDetails"]["city"]["cityName"]).replace(","," ")
 							
 				if nacl_id != '':									
 					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + nacl_id + "," + country + "," + city + "," + asn_org + "," + org + "," + isp + "," + asn
-					
 				else:
-					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + "external_nacl" + "," + country + "," + city + "," + asn_org + "," + org + "," + isp + "," + asn
+					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + "external_nacl " + "," + country + "," + city + "," + asn_org + "," + org + "," + isp + "," + asn
 
 				if len(json_a) == 0:
 					json_a.append(ioc)					
@@ -186,8 +167,7 @@ def search_ioc():
 				asn = data["detail"]["service"]["action"]["portProbeAction"]["portProbeDetails"][0]["remoteIpDetails"]["organization"]["asn"]
 				
 				if nacl_id != '':									
-					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + nacl_id+ "," + country + "," + city + "," + asn_org + "," + org + "," + isp + "," + asn
-					
+					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + nacl_id + "," + country + "," + city + "," + asn_org + "," + org + "," + isp + "," + asn
 				else:
 					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + "external_nacl" + "," + country + "," + city + "," + asn_org + "," + org + "," + isp + "," + asn
 
@@ -233,7 +213,6 @@ def search_ioc():
 
 				if nacl_id != '':									
 					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + nacl_id
-					
 				else:
 					ioc = ttp + "," + account_id + "," + region + "," + subnet_id + "," + src_ip + "," + instance_id + "," + "external_nacl"
 
@@ -243,6 +222,7 @@ def search_ioc():
 					for e in json_a:
 						if e != ioc:											
 							json_a.append(ioc)
+
 				# dump_flows(subnet_id)
 
 		except Exception as e:
@@ -266,7 +246,7 @@ def get_netacl_id(subnet_id):
 		
 		for n in nacls:            
 			if n['SubnetId'] == subnet_id:
-				nacl_id = n['NetworkAclId']				
+				nacl_id = n['NetworkAclId']
 		
 		return nacl_id
 
@@ -275,8 +255,8 @@ def get_netacl_id(subnet_id):
 
 
 def incident_and_response():	
-	
-	log.info("Incident and response")
+
+	log.info("Incident and Response...")
 
 	ts = str(datetime.datetime.now())
 
@@ -308,27 +288,27 @@ def incident_and_response():
 			
 			if nacl_id != "external_nacl":
 				rule_no = get_nacl_rule_no(nacl_id)
-				create_nacl_rule(nacl_id,src_ip,rule_no)
+				create_nacl_rule(nacl_id, src_ip, rule_no)
 
 			update_table_attackers(src_ip, ts, subnet_id, region, account_id, instance_id, nacl_id, ttp, country, city, asn_org, org, isp, asn, rule_no)
 
 	for jsb in ujsb:
 		
-		ttp,account_id,region,src_ip,country,city,asn_org,org,isp,asn= jsb.split(",")
+		ttp, account_id, region, src_ip, country, city, asn_org, org, isp, asn= jsb.split(",")
 
 		update_ip_set(src_ip)
 		
 		rule_no = "-1"
 		if nacl_id != "external_nacl":
 			rule_no = get_nacl_rule_no(nacl_id)
-			create_nacl_rule(nacl_id,src_ip,rule_no)
+			create_nacl_rule(nacl_id, src_ip, rule_no)
 
 		update_table_attackers(src_ip, ts, subnet_id, region, account_id, instance_id, nacl_id, ttp, country, city, asn_org, org, isp, asn, rule_no)
 
 
 def update_ip_set(src_ip):
 
-	log.info ("updating ip set...")
+	log.info("updating ip set...")
 	try:
 		response = waf.update_ip_set(
 			IPSetId=IPSET_ID,
@@ -342,15 +322,15 @@ def update_ip_set(src_ip):
 			}]
 		)       
 	except Exception as e:
-		log.info ("WAF IPSet could not be updated",e)
+		log.info("WAF IPSet could not be updated",e)
 
 
-def update_table_attackers(attacker_ip, timestamp, subnet_id, region, account_id, instance_id, nacl_id, ttp,country, city, asn_org, org, isp, asn, rule_no):
+def update_table_attackers(attacker_ip, timestamp, subnet_id, region, account_id, instance_id, nacl_id, ttp, country, city, asn_org, org, isp, asn, rule_no):
 
 	if not city:
 		city = "NIA"
 
-	log.info ("updating table attackers ...")
+	log.info("updating table attackers ...")
 
 	table = dynamodb.Table(DYNAMO_TABLE)
 
@@ -376,12 +356,12 @@ def update_table_attackers(attacker_ip, timestamp, subnet_id, region, account_id
 			)
 
 	except Exception as e:
-		log.info ("table could not be updated",e)
+		log.info("table could not be updated", e)
 
 
 def get_nacl_rule_no(nacl_id):
 
-	log.info("getting NACL id ...")
+	log.info("get NACL id")
 	rule = get_rules(nacl_id)
 	i = min(rule) + 1
 
@@ -406,15 +386,15 @@ def create_nacl_rule(nacl_id, attacker_ip, rule_no):
 	nacl = r_ec2.NetworkAcl(nacl_id)
 
 	response = nacl.create_entry(
-		CidrBlock=attacker_ip + '/32',
-		Egress=False,
-		PortRange={
-			'From': 0,
-			'To': 65535
-		},
-		Protocol='-1',
-		RuleAction='deny',
-		RuleNumber=rule_no
+	CidrBlock = attacker_ip + '/32',
+	Egress=False,
+	PortRange={
+		'From': 0,
+		'To': 65535
+	},
+	Protocol='-1',
+	RuleAction='deny',
+	RuleNumber=rule_no
 	)
 
 	if response['ResponseMetadata']['HTTPStatusCode'] == 200:
@@ -425,7 +405,7 @@ def create_nacl_rule(nacl_id, attacker_ip, rule_no):
 
 def get_rules(nacl_id):
 	
-	log.info("getting rules for ", nacl_id)
+	log.info("get rules for", nacl_id)
 
 	rules = []
 
@@ -439,7 +419,8 @@ def get_rules(nacl_id):
 	
 	for d in data:		
 		rules.append(d['RuleNumber'])
-		
+	
+	log.info("rules",rules)
 	return set(rules)
 	
 		
@@ -453,15 +434,14 @@ def delete_sqs():
 			sqs.delete_message(
 				QueueUrl=queue_url,
 				ReceiptHandle=receipt_handle
-			)
-
+				)
 	except Exception as e:
 		log.info("SQS queue could not be deleted", e)
 
 
 def dump_flows(subnet_id):
 
-	log.info("creating flows logs on subnet:",subnet_id)
+	log.info("creating flows logs on the subnet:", subnet_id)
 
 	try:
 		response = ec2.create_flow_logs(
@@ -473,13 +453,13 @@ def dump_flows(subnet_id):
 			LogDestinationType='s3',
 			LogDestination='arn:aws:s3:::s3-bucket-cloud-sniper/analytics/'
 		)
-	except Exception as e:		
-		log.info("Flow logs could not be created:", e)
+	except Exception as e:
+		log.info("Flow logs could not be created", e)
 
 
 def clean_nacls():
 
-	log.info("Cleaning NACls...")
+	log.info("Cleaning NACls")
 
 	try:
 		now = datetime.datetime.now()
@@ -493,29 +473,28 @@ def clean_nacls():
 			old = datetime.datetime.strptime(t, '%Y-%m-%d %H:%M:%S.%f')
 			difh = (now - old).seconds//(60*60)					
 			
-			if difh >= 6:				
-				
+			if difh >= 6:
 				try:
 					network_acl = r_ec2.NetworkAcl(r['nacl_id'])
 					response2 = network_acl.delete_entry(
 						Egress=False,
 						RuleNumber=int(r['rule_no'])
-					)					
-					
+					)
+
 					if response2['ResponseMetadata']['HTTPStatusCode'] == 200:
 						log.info('NACL rule deleted')
-						
+
 					else:
-						log.info('NACL rule deletion failed')
+						log.info('Failed to delete the rule')
 
 				except Exception as e:
-					log.info("Failed to instantiate NetworkAcl", e)
+					log.info("Failed to instantiate resource NetworkAcl", e)
 			
 	except Exception as e:        
 		log.info("NACls could not be deleted:", e)
 
 
-def cloud_sniper(event, context):
+def cloud_sniper (event, context):
 
 	global message
 
@@ -534,5 +513,4 @@ def cloud_sniper(event, context):
 			log.info("There is no new message in the queue")
 		
 	except Exception as e:
-		log.error("Failure to process GD finding.", e)
-		raise
+		log.error('Failure to process GD finding')
