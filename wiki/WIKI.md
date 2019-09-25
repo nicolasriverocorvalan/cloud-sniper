@@ -13,7 +13,7 @@ A knowledge database will be created to store the *IOCs* that affect the cloud e
 
 The ***Cloud Sniper Analytics*** module allows to analyze the flow logs of the entire network where an affected instance is deployed and obtain analytics on traffic behavior, looking for *Command and Control (C2)* activity.
 
-### Installation (AWS)
+### Installation (for AWS)
 
     Cloud Sniper uses Terraform to automatically deploy the entire infrastructure in the cloud. The core is programmed in python, so it can be extended according to the needs of each vSOC.
     
@@ -32,9 +32,9 @@ The ***Cloud Sniper Analytics*** module allows to analyze the flow logs of the e
     4.  Edit the main.tf file
 
         provider "aws" {
-            region                = "region"
+            region                    = "region"
             shared_credentials_file   = "/your-home/.aws/credentials"
-            profile               = "your-profile"
+            profile                   = "your-profile"
         }
 
     5.  ~/Cloud-Sniper$ terraform init

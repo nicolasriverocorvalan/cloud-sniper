@@ -22,7 +22,7 @@ To detect advanced attack techniques, which may easily be ignored, the ***Cloud 
 <br> </br>
 ### WIKI => [HOW IT WORKS](wiki/WIKI.md)
 
-### NEWS!!! Cloud Sniper Latest Releases
+### Cloud Sniper releases
 
     1.  Automatic Incident and Response 
         1.  WAF filtering
