@@ -1,6 +1,5 @@
 ### [Cloud Sniper has a new home !! Click here to visit!!](https://github.com/cloud-sniper/cloud-sniper)
 <br> </br>
-<br> </br>
 ![alt text](images/logo.png "Cloud Sniper")
 <br> </br>
 ## *Cloud Security Operations*
